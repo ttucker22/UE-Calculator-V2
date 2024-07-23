@@ -238,8 +238,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             showOptionsForCard(selectedCards[currentCardIndex]);
         } else {
             showCalculators();
+            setupCalculatorEventListeners();
         }
     });
+});
 
 // Shoulder Joint Flexion & Extension data
 const SHOULDERFlexionExtensionData = [
@@ -978,63 +980,62 @@ function showCalculators() {
                     </table>
                     <p>Total: <span id="shoulder-rom-total">0</span> UE = <span id="shoulder-rom-wpi">0</span> WPI</p>
                 `;
-                        } else if (cardValue === 'shoulder' && option === 'Strength') {
-                        calculatorCard.innerHTML = `
-            <h3>Shoulder - Muscle Strength</h3>
-            <table class="strength-table">
-                <tr class="header-row">
-                    <th>Motion</th>
-                    <th>Max UE</th>
-                    <th>Strength Deficit %</th>
-                    <th>UE Impairment</th>
-                </tr>
-                <tr>
-                    <td>Flexion</td>
-                    <td>24</td>
-                    <td><input type="number" id="shoulder-flexion-strength-deficit" min="0" max="50" step="1"></td>
-                    <td><input type="number" id="shoulder-flexion-strength-imp" min="0" max="24" step="0.1"></td>
-                </tr>
-                <tr>
-                    <td>Extension</td>
-                    <td>6</td>
-                    <td><input type="number" id="shoulder-extension-strength-deficit" min="0" max="50" step="1"></td>
-                    <td><input type="number" id="shoulder-extension-strength-imp" min="0" max="6" step="0.1"></td>
-                </tr>
-                <tr>
-                    <td>Abduction</td>
-                    <td>12</td>
-                    <td><input type="number" id="shoulder-abduction-strength-deficit" min="0" max="50" step="1"></td>
-                    <td><input type="number" id="shoulder-abduction-strength-imp" min="0" max="12" step="0.1"></td>
-                </tr>
-                <tr>
-                    <td>Adduction</td>
-                    <td>6</td>
-                    <td><input type="number" id="shoulder-adduction-strength-deficit" min="0" max="50" step="1"></td>
-                    <td><input type="number" id="shoulder-adduction-strength-imp" min="0" max="6" step="0.1"></td>
-                </tr>
-                <tr>
-                    <td>Internal Rotation</td>
-                    <td>6</td>
-                    <td><input type="number" id="shoulder-internal-rotation-strength-deficit" min="0" max="50" step="1"></td>
-                    <td><input type="number" id="shoulder-internal-rotation-strength-imp" min="0" max="6" step="0.1"></td>
-                </tr>
-                <tr>
-                    <td>External Rotation</td>
-                    <td>6</td>
-                    <td><input type="number" id="shoulder-external-rotation-strength-deficit" min="0" max="50" step="1"></td>
-                    <td><input type="number" id="shoulder-external-rotation-strength-imp" min="0" max="6" step="0.1"></td>
-                </tr>
-            </table>
-            <p>Total UE Impairment: <span id="shoulder-strength-total-ue">0</span></p>
-            <p>Total WPI: <span id="shoulder-strength-total-wpi">0</span></p>
-            <div class="instructions">
-                <p>Instructions: Enter the strength deficit percent provided by physician for each motion. Grade 4 strength is 1 to 25% strength deficit and Grade 3 Strength is 26 to 50% strength deficit. If a strength deficit percent is not provided by physician, enter the strength UE impairment for each motion provided by physician.</p>
-            </div>
-            <div class="reference">
-                <p>Reference: Table 16-35 on p. 510 of The AMA Guides 5th Edition</p>
-            </div>
-        `;
-    }
+            } else if (cardValue === 'shoulder' && option === 'Strength') {
+                calculatorCard.innerHTML = `
+                    <h3>Shoulder - Muscle Strength</h3>
+                    <table class="strength-table">
+                        <tr class="header-row">
+                            <th>Motion</th>
+                            <th>Max UE</th>
+                            <th>Strength Deficit %</th>
+                            <th>UE Impairment</th>
+                        </tr>
+                        <tr>
+                            <td>Flexion</td>
+                            <td>24</td>
+                            <td><input type="number" id="shoulder-flexion-strength-deficit" min="0" max="50" step="1"></td>
+                            <td><input type="number" id="shoulder-flexion-strength-imp" min="0" max="24" step="0.1"></td>
+                        </tr>
+                        <tr>
+                            <td>Extension</td>
+                            <td>6</td>
+                            <td><input type="number" id="shoulder-extension-strength-deficit" min="0" max="50" step="1"></td>
+                            <td><input type="number" id="shoulder-extension-strength-imp" min="0" max="6" step="0.1"></td>
+                        </tr>
+                        <tr>
+                            <td>Abduction</td>
+                            <td>12</td>
+                            <td><input type="number" id="shoulder-abduction-strength-deficit" min="0" max="50" step="1"></td>
+                            <td><input type="number" id="shoulder-abduction-strength-imp" min="0" max="12" step="0.1"></td>
+                        </tr>
+                        <tr>
+                            <td>Adduction</td>
+                            <td>6</td>
+                            <td><input type="number" id="shoulder-adduction-strength-deficit" min="0" max="50" step="1"></td>
+                            <td><input type="number" id="shoulder-adduction-strength-imp" min="0" max="6" step="0.1"></td>
+                        </tr>
+                        <tr>
+                            <td>Internal Rotation</td>
+                            <td>6</td>
+                            <td><input type="number" id="shoulder-internal-rotation-strength-deficit" min="0" max="50" step="1"></td>
+                            <td><input type="number" id="shoulder-internal-rotation-strength-imp" min="0" max="6" step="0.1"></td>
+                        </tr>
+                        <tr>
+                            <td>External Rotation</td>
+                            <td>6</td>
+                            <td><input type="number" id="shoulder-external-rotation-strength-deficit" min="0" max="50" step="1"></td>
+                            <td><input type="number" id="shoulder-external-rotation-strength-imp" min="0" max="6" step="0.1"></td>
+                        </tr>
+                    </table>
+                    <p>Total UE Impairment: <span id="shoulder-strength-total-ue">0</span></p>
+                    <p>Total WPI: <span id="shoulder-strength-total-wpi">0</span></p>
+                    <div class="instructions">
+                        <p>Instructions: Enter the strength deficit percent provided by physician for each motion. Grade 4 strength is 1 to 25% strength deficit and Grade 3 Strength is 26 to 50% strength deficit. If a strength deficit percent is not provided by physician, enter the strength UE impairment for each motion provided by physician.</p>
+                    </div>
+                    <div class="reference">
+                        <p>Reference: Table 16-35 on p. 510 of The AMA Guides 5th Edition</p>
+                    </div>
+                `;
             } else {
                 calculatorCard.innerHTML = `
                     <h3>${cardValue.charAt(0).toUpperCase() + cardValue.slice(1)} - ${option}</h3>
@@ -1051,17 +1052,18 @@ function showCalculators() {
             calculatorsList.appendChild(calculatorCard);
         });
     }
+}
 
-    // Add event listeners for shoulder ROM inputs
+function setupCalculatorEventListeners() {
+    // Set up event listeners for shoulder ROM inputs
     if (selectedOptions.shoulder && selectedOptions.shoulder.includes('ROM')) {
         const shoulderInputs = ['flexion', 'extension', 'abduction', 'adduction', 'internal-rotation', 'external-rotation', 'ankylosis-fe', 'ankylosis-aa', 'ankylosis-ie'];
         shoulderInputs.forEach(input => {
             document.getElementById(`shoulder-${input}`).addEventListener('input', calculateShoulderROM);
         });
     }
-}
 
-        // Add event listeners for shoulder strength inputs
+    // Set up event listeners for shoulder strength inputs
     if (selectedOptions.shoulder && selectedOptions.shoulder.includes('Strength')) {
         const movements = ['flexion', 'extension', 'abduction', 'adduction', 'internal-rotation', 'external-rotation'];
         movements.forEach(movement => {
@@ -1069,6 +1071,10 @@ function showCalculators() {
             document.getElementById(`shoulder-${movement}-strength-imp`).addEventListener('input', (e) => calculateShoulderStrength(movement, 'imp'));
         });
     }
+}
+
+function calculateShoulderROM() {
+    updateShoulderImpairment();
 }
 
 function calculateShoulderStrength(movement, inputType) {
@@ -1102,10 +1108,6 @@ function updateTotalShoulderStrengthImpairment() {
 
     document.getElementById('shoulder-strength-total-ue').textContent = totalUEImpairment.toFixed(1);
     document.getElementById('shoulder-strength-total-wpi').textContent = totalWPI;
-}
-
-function calculateShoulderROM() {
-    updateShoulderImpairment();
 }
 
 function findImpairment(angle, dataArray, angleField) {
@@ -1195,15 +1197,10 @@ function updateShoulderImpairment() {
     console.log('Total Impairment:', totalImp);
     console.log('WPI:', wpi);
 }
-    
-// Event listeners for all shoulder input fields
-const shoulderInputFields = document.querySelectorAll('input[type="number"][id^="shoulder"]');
-shoulderInputFields.forEach(input => {
-    input.addEventListener('input', updateShoulderImpairment);
-});
 
 // Clear All button functionality
 document.getElementById('clearAllButton').addEventListener('click', () => {
+    const shoulderInputFields = document.querySelectorAll('input[type="number"][id^="shoulder"]');
     shoulderInputFields.forEach(input => {
         input.value = '';
     });
@@ -1215,8 +1212,6 @@ document.getElementById('clearAllButton').addEventListener('click', () => {
 
     document.getElementById('shoulder-rom-total').textContent = '0';
     document.getElementById('shoulder-rom-wpi').textContent = '0';
+    document.getElementById('shoulder-strength-total-ue').textContent = '0';
+    document.getElementById('shoulder-strength-total-wpi').textContent = '0';
 });
-    
-});
-</script>
-</body></html>
