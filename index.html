@@ -126,6 +126,11 @@ button:hover {
     margin-top: 20px;
     font-size: 0.9em;
 }
+    .total-impairment {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.1em;
+}
 </style>
 </head>
 <body>
@@ -987,7 +992,8 @@ function showCalculators() {
                             <td id="shoulder-ankylosis-ie-imp">0</td>
                         </tr>
                     </table>
-                    <p>Total: <span id="shoulder-rom-total">0</span> UE = <span id="shoulder-rom-wpi">0</span> WPI</p>
+                    <p><strong>Total: <span id="shoulder-rom-total">0</span> UE = <span id="shoulder-rom-wpi">0</span> WPI</strong></p>
+                    <p class="total-impairment"><strong>Total: <span id="shoulder-rom-total">0</span> UE = <span id="shoulder-rom-wpi">0</span> WPI</strong></p>
                 `;
             } else if (cardValue === 'shoulder' && option === 'Strength') {
                 calculatorCard.innerHTML = `
@@ -1036,7 +1042,8 @@ function showCalculators() {
         <td><input type="number" id="shoulder-external-rotation-strength-imp" min="0" max="3" step="1"></td>
     </tr>
 </table>
-<p>Total: <span id="shoulder-strength-total-ue">0 UE = 0 WPI</span></p>
+<p><strong>Total: <span id="shoulder-strength-total-ue">0 UE = 0 WPI</span></strong></p>
+<p class="total-impairment"><strong>Total: <span id="shoulder-strength-total-ue">0 UE = 0 WPI</span></strong></p>
                     <div class="instructions">
                         <p>Instructions: Enter the strength deficit percent provided by physician for each motion. Grade 4 strength is 1 to 25% strength deficit and Grade 3 Strength is 26 to 50% strength deficit. If a strength deficit percent is not provided by physician, enter the strength UE impairment for each motion provided by physician.</p>
                     </div>
@@ -1202,10 +1209,6 @@ function updateShoulderImpairment() {
 
     document.getElementById('shoulder-rom-total').textContent = totalImp;
     document.getElementById('shoulder-rom-wpi').textContent = wpi;
-
-    console.log('Impairments:', impairments);
-    console.log('Total Impairment:', totalImp);
-    console.log('WPI:', wpi);
 }
 
 // Clear All button functionality
